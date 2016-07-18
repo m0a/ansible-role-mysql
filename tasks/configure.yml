@@ -1,4 +1,21 @@
 ---
+- name: "Copy CertFiles to/etc/mysql_ssl (expired day: 2026/7)"
+  copy:
+    src: "mysql_ssl/{{item}}"
+    dest: /var/lib/mysql/
+    owner: mysql
+    group: mysql
+    mode: 0600
+  with_items:
+    - ca-key.pem
+    - ca.pem
+    - client-cert.pem
+    - client-key.pem
+    - private_key.pem
+    - public_key.pem
+    - server-cert.pem
+    - server-key.pem
+
 - name: Copy my.cnf global MySQL configuration.
   template:
     src: my.cnf.j2
